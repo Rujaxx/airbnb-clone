@@ -23,8 +23,16 @@ const UserSchema = new mongoose.Schema({
         required : [true, 'Please add a password'],
         minlength : 6,
         select : false
+    },
+    createdAt :{
+        type : Date,
+        default : Date.now()
+    },
+    updatedAt :{
+        type : Date,
+        default : new Date()
     }
-})
+},{timestamps : true})
 
 
 //Match Password
