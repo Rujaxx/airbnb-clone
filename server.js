@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const errorHandler = require('./middlewares/error')
 
 //Load ENV vars
 dotenv.config({ path : './config/config.env'})
@@ -18,6 +19,9 @@ app.use(express.json())
 
 //Routes
 app.use('/api/v1/auth', auth)
+
+//ErrorHandler
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
