@@ -11,7 +11,9 @@ exports.register = asyncHandler(async(req,res,next) => {
     //Create user
     const user = await User.create({ name, email, password})
 
-    res.status(200).json({ success : true, message : 'User registered successfully'})
+    const token = user.getSignedJwtToken()
+
+    res.status(200).json({ success : true, message : 'User registered successfully' , token : token})
 })
 
 // @desc      Login user
@@ -38,5 +40,7 @@ exports.login = async(req,res,next) => {
         return next(new ErrorResponse('Invalid Credentials',400))
     }
 
-    res.status(200).json({ success : true, message : 'User logged in successfully'})
+    const token = user.getSignedJwtToken()
+
+    res.status(200).json({ success : true, message : 'User logged in successfully', token : tokens})
 }
